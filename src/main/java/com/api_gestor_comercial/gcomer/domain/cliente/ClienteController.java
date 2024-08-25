@@ -1,7 +1,5 @@
 package com.api_gestor_comercial.gcomer.domain.cliente;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,7 +59,6 @@ public class ClienteController {
         }
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<DatosCliente> buscarClientePorId(@PathVariable Long id) {
         Cliente cliente = clienteService.findById(id);
@@ -72,8 +69,11 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping("/nombre")
-    public ResponseEntity<Page<DatosCliente>> buscarClientePorNombre(@RequestParam String nombre, Pageable pageable) {
+    public ResponseEntity<Page<DatosCliente>> buscarClientePorNombre(
+            @RequestParam String nombre,
+            @org.springdoc.core.annotations.ParameterObject @PageableDefault(size = 10) Pageable pageable) {
         Page<DatosCliente> cliente = clienteService.findByNombre(pageable, nombre);
         return ResponseEntity.ok(cliente);
     }

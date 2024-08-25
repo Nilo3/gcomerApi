@@ -57,5 +57,4 @@ public class ClienteService {
                 .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado"));
     }
 
-
 }
